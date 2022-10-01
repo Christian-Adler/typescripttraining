@@ -1,10 +1,14 @@
+// Custom Type / Type Alias
+type Combinable = number | string;
+type ConversionDescriptor = 'as-number' | 'as-text';
+
 /**
  *
  * @param input1
  * @param input2
  * @param resultConversion literal type
  */
-const combine = (input1: number | string, input2: number | string, resultConversion: 'as-number' | 'as-text') => {
+const combine = (input1: Combinable, input2: Combinable, resultConversion: ConversionDescriptor) => {
     let result;
     if (typeof input1 === 'number' && typeof input2 === 'number')
         result = input1 + input2;
