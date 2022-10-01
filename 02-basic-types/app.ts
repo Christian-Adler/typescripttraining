@@ -6,6 +6,10 @@ const printResult = (num: number) => {
     console.log('Result:' + num);
 }
 
+const addAndHandle = (n1: number, n2: number, cb: (num: number) => void) => {
+    cb(add(n1, n2));
+}
+
 printResult(add(1, 2));
 
 // let combineValues: Function;
@@ -16,3 +20,7 @@ combineValues = add;
 // combineValues = printResult;
 
 console.log(combineValues(8, 8));
+
+addAndHandle(10, 20, (num) => {
+    console.log(num);
+});
