@@ -104,3 +104,12 @@ const moveAnimal = (animal: Animal) => {
 }
 
 moveAnimal({type: 'bird', flyingSpeed: 10});
+
+
+// const paragraph = document.querySelector('p');
+// const paragraph = document.getElementById('message-output');
+
+// TypeCast
+// const userInput = <HTMLInputElement>document.getElementById('user-input')!;
+const userInput = document.getElementById('user-input')! as HTMLInputElement; // Better because no clash with react
+userInput.value = 'Hi there';
