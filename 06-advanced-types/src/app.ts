@@ -115,3 +115,16 @@ moveAnimal({type: 'bird', flyingSpeed: 10});
 const userInput = document.getElementById('user-input');
 if (userInput)
     (userInput as HTMLInputElement).value = 'Hi there';
+
+// Index Types
+interface ErrorContainer { //{email:'not a valid email', username:'Must start with a char'}
+    // id: string
+
+    [prop: string]: string; // i don't know the name of the property, but it is a string, and it's value is as well a string
+}
+
+const errorBag: ErrorContainer = {
+    email: 'not a valid email!',
+    username: 'Must start with a capital character!'
+};
+
