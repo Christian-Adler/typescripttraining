@@ -1,13 +1,17 @@
 class Department {
-    name: string;//name:string ='DEFAULT';
+    // private id: string;
+    // private name: string;//name:string ='DEFAULT';
     private employees: string[] = [];
 
-    constructor(n: string) {
-        this.name = n;
+    // constructor(n: string) {
+    //     this.name = n;
+    // }
+    // implicit constructor - fields are generated
+    constructor(private id: string, public name: string) {
     }
 
     describe(this: Department) {
-        console.log('Department: ' + this.name);
+        console.log(`Department (${this.id}) ${this.name}`);
     }
 
     addEmployee(employee: string) {
@@ -20,7 +24,7 @@ class Department {
     }
 }
 
-const accounting = new Department('Accounting');
+const accounting = new Department('id', 'Accounting');
 
 // console.log(accounting);
 
