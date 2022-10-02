@@ -15,13 +15,15 @@ const e1: ElevatedEmployee = {
 
 type Combinable = string | number;
 type Numeric = number | boolean;
-type Universal = Combinable & Numeric;
+// type Universal = Combinable & Numeric;
 
 const add = (a: Combinable, b: Combinable) => {
     if (typeof a === 'string' || typeof b === 'string') // Type Guard
         return a.toString() + b.toString();
     return a + b;
 }
+
+console.log(add(1, 2));
 
 type UnknownEmployee = Employee | Admin;
 
@@ -39,3 +41,35 @@ printEmployeeInfo(e1);
 printEmployeeInfo({name: 'Abc', startDate: new Date()});
 
 
+class Car {
+    drive() {
+        console.log('Driving...');
+    }
+}
+
+class Truck {
+    drive() {
+        console.log('Truck driving');
+    }
+
+    loadCargo(amount: number) {
+        console.log('Loading cargo', amount);
+    }
+}
+
+type Vehicle = Car | Truck;
+
+const v1 = new Car();
+const v2 = new Truck();
+
+const useVehicle = (vehicle: Vehicle) => {
+    vehicle.drive();
+    if ('loadCargo' in vehicle)
+        vehicle.loadCargo(1000);
+    // Better: with classes instanceof is possible (not with interfaces (they are not compiled to js))
+    if (vehicle instanceof Truck)
+        vehicle.loadCargo(500);
+}
+
+useVehicle(v1);
+useVehicle(v2);
