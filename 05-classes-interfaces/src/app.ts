@@ -1,7 +1,7 @@
 class Department {
     // private id: string;
     // private name: string;//name:string ='DEFAULT';
-    private employees: string[] = [];
+    protected employees: string[] = [];
 
     // constructor(n: string) {
     //     this.name = n;
@@ -33,6 +33,12 @@ class ITDepartment extends Department {
 class AccountingDepartment extends Department {
     constructor(id: string, private reports: string[]) {
         super(id, 'Accounting');
+    }
+
+    addEmployee(employee: string) {
+        if (employee.length === 0) return;
+        this.employees.push(employee); //
+        super.addEmployee(employee); // if employees is private
     }
 
     addReport(text: string) {
