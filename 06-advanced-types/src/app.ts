@@ -143,3 +143,9 @@ const fetchedUserData = {
 }
 
 console.log(fetchedUserData.job?.title);
+
+// Nullish coalescing
+const userInp = null;
+// const storedData = userInp || 'DEFAULT';// test on falsy- e.g.empty string ''
+const storedData = userInp ?? 'DEFAULT'; // Nullish coalescing: really null or undefined
+console.log(storedData);
