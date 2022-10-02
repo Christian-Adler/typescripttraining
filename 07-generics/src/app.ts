@@ -104,3 +104,23 @@ const numberOrStringStorage = new DataStorage<number | string>();
 // //...
 // objStorage.removeItem({name: 'Max'}); // Tut nicht! Weil es ein komplett neues Objekt ist und per indexOf dann nicht gefunden wird! -> -1 statt 0
 // console.log(objStorage.getItems());
+
+// Utility types https://www.typescriptlang.org/docs/handbook/utility-types.html
+interface CourseGoal {
+    title: string;
+    desc: string;
+    completeUntil: Date;
+}
+
+function createCourseGoal(title: string, desc: string, date: Date): CourseGoal {
+    // return {title, desc, completeUntil: date};
+    let courseGoal: Partial<CourseGoal> = {}; // temp all properties optional
+    courseGoal.title = title;
+    courseGoal.desc = desc;
+    courseGoal.completeUntil = date;
+    return courseGoal as CourseGoal;
+}
+
+const names: Readonly<string[]> = ['max', 'Anna'];
+// names.push('manu');
+// names.pop();
