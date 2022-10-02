@@ -10,6 +10,10 @@ class Department {
     constructor(private readonly id: string, public name: string) {
     }
 
+    static createEmployee(name: string) {
+        return {name};
+    }
+
     describe(this: Department) {
         console.log(`Department (${this.id}) ${this.name}`);
     }
@@ -64,6 +68,9 @@ class AccountingDepartment extends Department {
         console.log(this.reports);
     }
 }
+
+const employee1 = Department.createEmployee('And');
+console.log(employee1);
 
 const it = new ITDepartment('id', ['Admin']);
 console.log(it);
