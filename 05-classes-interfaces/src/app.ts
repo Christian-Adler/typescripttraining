@@ -14,6 +14,7 @@ add = (n1: number, n2: number) => {
 
 interface Named {
     readonly name: string;
+    outputName?: string; // might exist - optional
 }
 
 interface Greetable extends Named { // interfaces could inherit from multiple Interfaces!
@@ -21,17 +22,27 @@ interface Greetable extends Named { // interfaces could inherit from multiple In
 }
 
 class Person implements Greetable {
-    constructor(public name: string, public age: number) {
+    outputName?: string;
+
+    constructor(public name: string, public age: number, outputName?: string) {
+        this.outputName = outputName;
     }
 
     greet(phrase: string) {
-        console.log(phrase + ' ' + this.name);
+        if (this.outputName)
+            console.log(phrase + ' ' + this.outputName);
+        else
+
+            console.log(phrase + ' ' + this.name);
     }
 }
 
 let user1: Greetable;
+let user2: Greetable;
 
 user1 = new Person('Chris', 41);
 // user1.name = 'a' // not allowed because of readonly
+user2 = new Person('Chris2', 41, 'Aber Hallo');
 
 user1.greet('Hi there - my name is');
+user2.greet('Hi there - my name is');
