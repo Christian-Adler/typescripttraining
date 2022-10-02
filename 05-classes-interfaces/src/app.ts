@@ -1,3 +1,17 @@
+// custom Function type
+// type AddFn = (a: number, b: number) => number;
+
+// with interface the same as Function Type
+interface AddFn {
+    (a: number, b: number): number; // anonymous function def
+}
+
+let add: AddFn;
+
+add = (n1: number, n2: number) => {
+    return n1 + n2;
+};
+
 interface Named {
     readonly name: string;
 }
