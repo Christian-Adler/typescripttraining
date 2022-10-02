@@ -1,4 +1,4 @@
-class Department {
+abstract class Department {
     // private id: string;
     // private name: string;//name:string ='DEFAULT';
     protected employees: string[] = [];
@@ -7,18 +7,23 @@ class Department {
     //     this.name = n;
     // }
     // implicit constructor - fields are generated
-    constructor(private readonly id: string, public name: string) {
+    constructor(protected readonly id: string, public name: string) {
     }
 
     static createEmployee(name: string) {
         return {name};
     }
 
-    describe(this: Department) {
-        console.log(`Department (${this.id}) ${this.name}`);
-    }
+    abstract describe(this: Department): void;
 
-    addEmployee(employee: string) {
+//     {
+//     // console.log(`Department (${this.id}) ${this.name}`);
+// }
+
+    addEmployee(employee
+                    :
+                    string
+    ) {
         this.employees.push(employee);
     }
 
@@ -31,6 +36,10 @@ class Department {
 class ITDepartment extends Department {
     constructor(id: string, public admins: string[]) {
         super(id, 'IT');
+    }
+
+    describe(): void {
+        console.log(`IT-Department (${this.id}) ${this.name} ${this.admins}`);
     }
 }
 
@@ -51,6 +60,10 @@ class AccountingDepartment extends Department {
     constructor(id: string, private reports: string[]) {
         super(id, 'Accounting');
         this.lastReport = reports[0];
+    }
+
+    describe() {
+        console.log(`AccountingDepartment -ID (${this.id})`);
     }
 
     addEmployee(employee: string) {
@@ -74,7 +87,9 @@ console.log(employee1);
 
 const it = new ITDepartment('id', ['Admin']);
 console.log(it);
-const accounting = new AccountingDepartment('id', []);
+it.describe();
+
+const accounting = new AccountingDepartment('id2', []);
 
 accounting.mostRecentReport = 'ABC';
 accounting.addReport('Some test');
