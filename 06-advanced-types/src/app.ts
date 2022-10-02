@@ -15,15 +15,23 @@ const e1: ElevatedEmployee = {
 
 type Combinable = string | number;
 type Numeric = number | boolean;
-// type Universal = Combinable & Numeric;
+type Universal = Combinable & Numeric;
 
-const add = (a: Combinable, b: Combinable) => {
+// overload function (not really possible with arrow functions
+function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: number, b: string): string;
+function add(a: string, b: number): string;
+function add(a: Combinable, b: Combinable) {
     if (typeof a === 'string' || typeof b === 'string') // Type Guard
         return a.toString() + b.toString();
     return a + b;
 }
 
 console.log(add(1, 2));
+const result = add(1, 5);
+const result2 = add("a", "b");
+const result3 = add("a", 1);
 
 type UnknownEmployee = Employee | Admin;
 
