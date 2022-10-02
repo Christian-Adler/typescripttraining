@@ -28,3 +28,16 @@ const merged3 = merge<{ name: string, someOther: number }, { age: number }>({nam
 console.log(merged2.someOther);
 // const merged3 = merge<string, number>({name: 'Max', someOther: 124}, {age: 25}); // Fehler
 // console.log(merged2.someOther);
+
+// interface PairObj {
+//     [prop: string]: any;
+// }
+//
+// const createPairObj = <T, U>(key1: string, t: T, key2: string, u: U) => {
+//     const res: PairObj = {};
+//     res[key1] = t;
+//     res[key2] = u;
+//     return res;
+// }
+//
+// const paired = createPairObj('a', {b: 'b'}, 'c', 123);
