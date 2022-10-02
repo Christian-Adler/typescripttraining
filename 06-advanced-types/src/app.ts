@@ -73,3 +73,34 @@ const useVehicle = (vehicle: Vehicle) => {
 
 useVehicle(v1);
 useVehicle(v2);
+
+// Discriminated Unions - working with object types
+
+interface Bird {
+    type: 'bird';
+    flyingSpeed: number;
+}
+
+interface Horse {
+    type: 'horse';
+    groundSpeed: number;
+}
+
+type Animal = Bird | Horse; // Discriminated union because of one common property which describes
+
+const moveAnimal = (animal: Animal) => {
+    // if (animal instanceof Bird) // not possible with interface
+    // if ('flyingSpeed' in animal) // possible
+    //     console.log('Moving with speed: ', animal.flyingSpeed);
+    let speed;
+    switch (animal.type) {
+        case "bird":
+            speed = animal.flyingSpeed;
+            break;
+        case "horse":
+            speed = animal.groundSpeed;
+    }
+    console.log('Moving with speed: ', speed);
+}
+
+moveAnimal({type: 'bird', flyingSpeed: 10});
