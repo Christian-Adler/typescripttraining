@@ -45,3 +45,22 @@ console.log(merged2.someOther);
 // }
 //
 // const paired = createPairObj('a', {b: 'b'}, 'c', 123);
+
+interface Lengthy {
+    length: number;
+}
+
+function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+    let desc = 'Got no value';
+    if (element.length === 1)
+        desc = 'Got 1 element';
+    else if (element.length > 0)
+        desc = 'Got ' + element.length + ' elements';
+
+    return [element, desc];
+}
+
+console.log(countAndDescribe('Hi there'));
+console.log(countAndDescribe(['Hi there']));
+console.log(countAndDescribe([]));
+// console.log(countAndDescribe(123)); // number hat kein length
