@@ -111,5 +111,7 @@ moveAnimal({type: 'bird', flyingSpeed: 10});
 
 // TypeCast
 // const userInput = <HTMLInputElement>document.getElementById('user-input')!;
-const userInput = document.getElementById('user-input')! as HTMLInputElement; // Better because no clash with react
-userInput.value = 'Hi there';
+// const userInput = document.getElementById('user-input')! as HTMLInputElement; // Better because no clash with react
+const userInput = document.getElementById('user-input');
+if (userInput)
+    (userInput as HTMLInputElement).value = 'Hi there';
