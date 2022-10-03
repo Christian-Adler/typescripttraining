@@ -13,9 +13,13 @@ function Logger(logString: string) {
 }
 
 function WithTemplate(template: string, hookId: string) {
-    return function (_: Function) { // Underscore _ tells TS that I know there is an argument - but I don't use it
+    return function (constructor: any) { // Underscore _ tells TS that I know there is an argument - but I don't use it
+        const p = new constructor();
         const hookEl = document.getElementById(hookId);
-        if (hookEl) hookEl.innerHTML = template;
+        if (hookEl) {
+            hookEl.innerHTML = template;
+            hookEl.querySelector('h1')!.textContent = p.name;
+        }
     };
 }
 
