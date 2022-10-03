@@ -45,9 +45,18 @@ console.log(pers);
 
 // --
 
+// Property decorator
 function Log(target: any, propertyName: string | Symbol) {
     console.log('Property decorator');
     console.log(target, propertyName);
+}
+
+// Accessor decorator
+function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
+    console.log('Accessor decorator');
+    console.log(target);
+    console.log(name);
+    console.log(descriptor);
 }
 
 class Product {
@@ -59,6 +68,7 @@ class Product {
         return this._title;
     }
 
+    @Log2
     set price(val: number) {
         if (val > 0)
             this._price = val;
