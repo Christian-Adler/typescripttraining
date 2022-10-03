@@ -15,13 +15,19 @@ function Logger(logString: string) {
 
 function WithTemplate(template: string, hookId: string) {
     console.log('TEMPLATE FACTORY');
-    return function (constructor: any) { // Underscore _ tells TS that I know there is an argument - but I don't use it
-        console.log('Rendering template...');
-        const p = new constructor();
-        const hookEl = document.getElementById(hookId);
-        if (hookEl) {
-            hookEl.innerHTML = template;
-            hookEl.querySelector('h1')!.textContent = p.name;
+    return function <T extends { new(...args: any[]): { name: string }, }>(originalConstructor: T) {
+
+        return class extends originalConstructor {
+            constructor(..._: any[]) {
+                super();
+
+                console.log('Rendering template...');
+                const hookEl = document.getElementById(hookId);
+                if (hookEl) {
+                    hookEl.innerHTML = template;
+                    hookEl.querySelector('h1')!.textContent = this.name;
+                }
+            }
         }
     };
 }
@@ -101,3 +107,5 @@ class Product {
         return this._price * (1 + tax);
     }
 }
+
+const p1 = new Product('book', 19);
