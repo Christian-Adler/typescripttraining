@@ -4,15 +4,16 @@
 // }
 
 // As factory Function
-function Logger() {
+function Logger(logString: string) {
     return function (constructor: Function) {
-        console.log('Logging...');
+        // console.log('Logging...');
+        console.log(logString);
         console.log(constructor);
     }
 }
 
 // @Logger
-@Logger()
+@Logger('LOGGING - PERSON')
 class Person {
     name = 'Max';
 
