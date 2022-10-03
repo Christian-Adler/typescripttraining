@@ -109,3 +109,33 @@ class Product {
 }
 
 const p1 = new Product('book', 19);
+
+function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value;
+    const adjDescriptor: PropertyDescriptor = {
+        configurable: true, enumerable: false,
+        get() { // Adding an extra layer to the method
+            // this refers to the object we originally defined the method
+            return originalMethod.bind(this);
+        }
+    };
+    return adjDescriptor;
+}
+
+class Printer {
+    message = 'this works';
+
+    @Autobind
+    showMessage() {
+        console.log(this.message);
+    }
+}
+
+const p = new Printer();
+p.showMessage();
+
+const button = document.querySelector('button')!;
+// button.addEventListener("click", p.showMessage); // wrong, because this
+// button.addEventListener("click", p.showMessage.bind(p)); // works without decorator
+button.addEventListener("click", p.showMessage);
+
