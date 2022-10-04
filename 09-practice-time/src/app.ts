@@ -1,3 +1,35 @@
+// Validation
+interface Validatable {
+    value: string | number;
+    required?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    min?: number;
+    max?: number;
+}
+
+function validate(validatableInput: Validatable) {
+    let isValid = true;
+    let value = validatableInput.value;
+    if (validatableInput.required) {
+        isValid = isValid && value.toString().trim().length !== 0;
+    }
+    if (typeof value === 'string') {
+        value = value.trim();
+        if (validatableInput.minLength && validatableInput.minLength >= 0)
+            isValid = isValid && value.length >= validatableInput.minLength;
+        if (validatableInput.maxLength && validatableInput.maxLength > 0)
+            isValid = isValid && value.length <= validatableInput.maxLength;
+    } else { // if(typeof value==='number'){
+        if (typeof validatableInput.min === 'number')
+            isValid = isValid && value >= validatableInput.min;
+        if (typeof validatableInput.max === "number")
+            isValid = isValid && value <= validatableInput.max;
+    }
+    return isValid;
+}
+
+
 function AutoBind(_target: any, _propertyKey: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
     const adjDescriptor: PropertyDescriptor = {
@@ -41,9 +73,14 @@ class ProjectInput {
         const enteredDesc = this.descInputElement.value;
         const enteredPeople = this.peopleInputElement.value;
 
-        if (enteredTitle.trim().length === 0 ||
-            enteredDesc.trim().length === 0 ||
-            enteredPeople.trim().length === 0
+        const titleValidatable: Validatable = {value: enteredTitle, required: true};
+        const descValidatable: Validatable = {value: enteredDesc, required: true, minLength: 5};
+        const peopleValidatable: Validatable = {value: +enteredPeople, required: true, min: 1, max: 5};
+
+        if (
+            !validate(titleValidatable) ||
+            !validate(descValidatable) ||
+            !validate(peopleValidatable)
         ) {
             alert('Invalid input! Please try again.');
             return;
