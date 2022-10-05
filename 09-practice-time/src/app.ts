@@ -170,8 +170,11 @@ class ProjectItem
   }
 
   @AutoBind
-  dragStartHandler(_event: DragEvent): void {
+  dragStartHandler(event: DragEvent): void {
     console.log("DragStart");
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
+    event.dataTransfer!.setData("text/plain", this.project.id);
+    event.dataTransfer!.effectAllowed = "move"; // Cursor
   }
   @AutoBind
   dragEndHandler(_event: DragEvent): void {
@@ -205,13 +208,16 @@ class ProjectList
   }
 
   @AutoBind
-  dragOverHandler(_event: DragEvent): void {
-    const listEl = this.element.querySelector("ul")!;
-    listEl.classList.add("droppable");
+  dragOverHandler(event: DragEvent): void {
+    if (event.dataTransfer && event.dataTransfer.types[0] === "text/plain") {
+      event.preventDefault(); // allow drop!
+      const listEl = this.element.querySelector("ul")!;
+      listEl.classList.add("droppable");
+    }
   }
   @AutoBind
-  dropHandler(_event: DragEvent): void {
-    throw new Error("Method not implemented.");
+  dropHandler(event: DragEvent): void {
+    console.log(event.dataTransfer!.getData("text/plain"));
   }
   @AutoBind
   dragLeaveHandler(_event: DragEvent): void {
