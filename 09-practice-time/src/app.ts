@@ -14,14 +14,22 @@ class Project {
 }
 
 // State
-type Listener = (items: Project[]) => void;
+type Listener<T> = (items: T[]) => void;
 
-class ProjectState {
+abstract class State<T> {
+  protected listeners: Listener<T>[] = [];
+  addListener(listenerFn: Listener<T>) {
+    this.listeners.push(listenerFn);
+  }
+}
+
+class ProjectState extends State<Project> {
   private static instance: ProjectState;
   private projects: Project[] = [];
-  private listeners: Listener[] = [];
 
-  private constructor() {}
+  private constructor() {
+    super();
+  }
 
   static getInstance() {
     if (!this.instance) this.instance = new ProjectState();
@@ -42,10 +50,6 @@ class ProjectState {
     for (const listenerFn of this.listeners) {
       listenerFn(this.projects.slice()); // clone projects
     }
-  }
-
-  addListener(listenerFn: Listener) {
-    this.listeners.push(listenerFn);
   }
 }
 
