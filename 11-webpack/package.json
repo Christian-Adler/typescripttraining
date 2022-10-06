@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Understanding TypeScript Course Setup",
   "main": "app.js",
-  "scripts": {},
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack --config webpack.config.prod.js"
+  },
   "keywords": [
     "typescript",
     "course"
@@ -11,6 +14,7 @@
   "author": "Maximilian Schwarzmüller",
   "license": "ISC",
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
     "ts-loader": "^9.4.1",
     "typescript": "^4.8.4",
     "webpack": "^5.74.0",

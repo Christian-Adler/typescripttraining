@@ -1,6 +1,5 @@
-// Solange der Browser die imports macht, muss .js angehaengt sein!
-import {ProjectInput} from "./components/project-input.js";
-import {ProjectList} from "./components/project-list.js";
+import {ProjectInput} from "./components/project-input";
+import {ProjectList} from "./components/project-list";
 
 /* const projectInput =  */
 new ProjectInput();

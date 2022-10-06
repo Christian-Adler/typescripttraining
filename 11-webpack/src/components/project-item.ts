@@ -1,10 +1,7 @@
-/// <reference path="base-components.ts" />
-/// <reference path="../decorators/autobind.ts" />
-
-import {Draggable} from "../models/drag-drop.js";
-import {Component} from "./base-components.js";
-import {AutoBind} from "../decorators/autobind.js";
-import {Project} from "../models/project.js";
+import {Draggable} from "../models/drag-drop";
+import {Component} from "./base-components";
+import {AutoBind} from "../decorators/autobind";
+import {Project} from "../models/project";
 
 export class ProjectItem
     extends Component<HTMLUListElement, HTMLLIElement>
