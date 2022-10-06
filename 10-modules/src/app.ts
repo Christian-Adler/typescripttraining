@@ -1,14 +1,12 @@
-/// <reference path="components/project-input.ts" />
-/// <reference path="components/project-list.ts" />
-/// <reference path="components/project-input.ts" />
+// Solange der Browser die imports macht, muss .js angehaengt sein!
+import {ProjectInput} from "./components/project-input.js";
+import {ProjectList} from "./components/project-list.js";
 
-namespace App {
+/* const projectInput =  */
+new ProjectInput();
 
-    /* const projectInput =  */
-    new ProjectInput();
+/* const activeProjList = */
+new ProjectList("active");
+/* const finishedProjList = */
+new ProjectList("finished");
 
-    /* const activeProjList = */
-    new ProjectList("active");
-    /* const finishedProjList = */
-    new ProjectList("finished");
-}
