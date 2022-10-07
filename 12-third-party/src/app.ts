@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import {plainToInstance} from "class-transformer";
 import _ from 'lodash';
 import {Product} from "./model.product";
+import {validate} from "class-validator";
 
 console.log(_.shuffle([1, 2, 3]));
 
@@ -20,3 +21,12 @@ const loadedByTransformer = plainToInstance(Product, products)
 for (const loadedProduct of loadedByTransformer) {
     console.log(loadedProduct.getInformation());
 }
+
+// Validation
+const newProd = new Product('', -5);
+validate(newProd).then(errors => {
+    if (errors.length > 0) {
+        console.log('VALIDATION ERRORS!', errors);
+    } else
+        console.log(newProd.getInformation());
+})
