@@ -1,6 +1,7 @@
 import React, {useRef} from "react";
 // import {useState} from "react";
-// import "./NewTodo.css";
+import "./NewTodo.css";
+
 // import classes from "./NewTodo.module.css";
 
 interface NewTodoProps {
@@ -17,7 +18,7 @@ const NewTodo: React.FC<NewTodoProps> = ({onAddTodo}) => {
     };
 
     return (<form onSubmit={submitHandler}>
-        <div>
+        <div className={'form-control'}>
             <label htmlFor={'todo-text'}>Todo Text</label>
             <input id={'todo-text'} type={"text"} ref={inputRef}/>
         </div>
